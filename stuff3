@@ -1,0 +1,227 @@
+--FLYSCRIPT
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local Destroyah = Instance.new("TextButton")
+local Frame_2 = Instance.new("Frame")
+local OnOrOff = Instance.new("TextLabel")
+local ToggleButton = Instance.new("TextButton")
+local Speed = Instance.new("TextBox")
+local TextLabel = Instance.new("TextLabel")
+local TextLabel_2 = Instance.new("TextLabel")
+local Players = game:GetService("Players")
+ScreenGui.Parent = Players.LocalPlayer.PlayerGui
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0.596996605, 0, 0.442779273, 0)
+Frame.Size = UDim2.new(0, 248, 0, 20)
+Destroyah.Name = "Destroyah"
+Destroyah.Parent = Frame
+Destroyah.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
+Destroyah.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Destroyah.BorderSizePixel = 0
+Destroyah.Position = UDim2.new(0.919354856, 0, 0, 0)
+Destroyah.Size = UDim2.new(0, 20, 0, 20)
+Destroyah.Font = Enum.Font.SourceSansBold
+Destroyah.Text = "X"
+Destroyah.TextColor3 = Color3.fromRGB(0, 0, 0)
+Destroyah.TextScaled = true
+Destroyah.TextSize = 14.000
+Destroyah.TextWrapped = true
+Frame_2.Parent = Frame
+Frame_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Frame_2.BackgroundTransparency = 0.300
+Frame_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame_2.BorderSizePixel = 0
+Frame_2.Position = UDim2.new(0, 0, 1, 0)
+Frame_2.Size = UDim2.new(0, 248, 0, 86)
+OnOrOff.Name = "OnOrOff"
+OnOrOff.Parent = Frame_2
+OnOrOff.BackgroundColor3 = Color3.fromRGB(107, 0, 0)
+OnOrOff.BorderColor3 = Color3.fromRGB(0, 0, 0)
+OnOrOff.BorderSizePixel = 0
+OnOrOff.Position = UDim2.new(0.0967741907, 0, 0.0833333358, 0)
+OnOrOff.Size = UDim2.new(0, 200, 0, 16)
+OnOrOff.Font = Enum.Font.Unknown
+OnOrOff.Text = "Fly Disabled"
+OnOrOff.TextColor3 = Color3.fromRGB(0, 0, 0)
+OnOrOff.TextScaled = true
+OnOrOff.TextSize = 14.000
+OnOrOff.TextWrapped = true
+ToggleButton.Name = "ToggleButton"
+ToggleButton.Parent = Frame_2
+ToggleButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ToggleButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ToggleButton.BorderSizePixel = 0
+ToggleButton.Position = UDim2.new(0.0967741907, 0, 0.746677816, 0)
+ToggleButton.Size = UDim2.new(0, 200, 0, 21)
+ToggleButton.Font = Enum.Font.SourceSansBold
+ToggleButton.Text = "Toggle Fly Mode"
+ToggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ToggleButton.TextSize = 14.000
+ToggleButton.TextWrapped = true
+Speed.Name = "Speed"
+Speed.Parent = Frame_2
+Speed.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Speed.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Speed.BorderSizePixel = 0
+Speed.Text = "5"
+Speed.Position = UDim2.new(0.435483873, 0, 0.392857045, 0)
+Speed.Size = UDim2.new(0, 116, 0, 17)
+Speed.Font = Enum.Font.SourceSans
+Speed.TextColor3 = Color3.fromRGB(0, 0, 0)
+Speed.TextSize = 14.000
+TextLabel.Parent = Frame_2
+TextLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(0.0967741907, 0, 0.392857045, 0)
+TextLabel.Size = UDim2.new(0, 84, 0, 17)
+TextLabel.Font = Enum.Font.Unknown
+TextLabel.Text = "Fly Speed:"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14.000
+TextLabel.TextWrapped = true
+TextLabel_2.Parent = Frame
+TextLabel_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_2.BorderSizePixel = 0
+TextLabel_2.Size = UDim2.new(0, 212, 0, 20)
+TextLabel_2.Font = Enum.Font.Unknown
+TextLabel_2.Text = "Fly Mode Control"
+TextLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.TextScaled = true
+TextLabel_2.TextSize = 14.000
+TextLabel_2.TextWrapped = true
+TextLabel_2.TextXAlignment = Enum.TextXAlignment.Left
+local dragging
+local dragInput
+local dragStart = Vector3.new(0,0,0)
+local startPos
+local function update(input)
+	local delta = input.Position - dragStart
+	local Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	game:GetService("TweenService"):Create(Frame, TweenInfo.new(.20), {Position = Position}):Play()
+end
+Frame.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		dragging = true
+		dragStart = input.Position
+		startPos = Frame.Position
+		input.Changed:Connect(function()if input.UserInputState == Enum.UserInputState.End then dragging = false end end)
+	end
+end)
+Frame.InputChanged:Connect(function(input)if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then dragInput = input end end)
+game:GetService("UserInputService").InputChanged:Connect(function(input)if input == dragInput and dragging then update(input)end end)
+local FLYING = false
+Destroyah.MouseButton1Click:Connect(function()
+	NOFLY()
+	wait(1)
+	ScreenGui:Destroy()
+end)
+Speed.Changed:Connect(function()flyspeed = Speed.Text end)
+ToggleButton.MouseButton1Click:Connect(function()if FLYING == false then sFLY()else NOFLY()end end)
+function getRoot(char)
+	local rootPart = char:FindFirstChild('HumanoidRootPart') or char:FindFirstChild('Torso') or char:FindFirstChild('UpperTorso')
+	return rootPart
+end
+QEfly = true
+flyspeed = Speed.Text
+local Mouse = Players.LocalPlayer:GetMouse()
+function onoroff(arg)
+	local text
+	if arg == true then text = "Enabled"else text = "Disabled"end
+	OnOrOff.Text = "Fly"..text
+end
+function sFLY()
+	onoroff(true)
+	repeat wait() until Players.LocalPlayer and Players.LocalPlayer.Character and getRoot(Players.LocalPlayer.Character) and Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+	repeat wait() until Mouse
+	if flyKeyDown or flyKeyUp then flyKeyDown:Disconnect() flyKeyUp:Disconnect() end
+	local T = getRoot(Players.LocalPlayer.Character)
+	local CONTROL = {F = 0, B = 0, L = 0, R = 0, Q = 0, E = 0}
+	local lCONTROL = {F = 0, B = 0, L = 0, R = 0, Q = 0, E = 0}
+	local SPEED = 0
+	local function FLY()
+		FLYING = true
+		local BG = Instance.new('BodyGyro')
+		local BV = Instance.new('BodyVelocity')
+		BG.P = 9e4
+		BG.Parent = T
+		BV.Parent = T
+		BG.maxTorque = Vector3.new(9e9, 9e9, 9e9)
+		BG.cframe = T.CFrame
+		BV.velocity = Vector3.new(0, 0, 0)
+		BV.maxForce = Vector3.new(9e9, 9e9, 9e9)
+		task.spawn(function()
+			repeat wait()
+				if Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid') then
+					Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').PlatformStand = true
+				end
+				if CONTROL.L + CONTROL.R ~= 0 or CONTROL.F + CONTROL.B ~= 0 or CONTROL.Q + CONTROL.E ~= 0 then
+					SPEED = 50
+				elseif not (CONTROL.L + CONTROL.R ~= 0 or CONTROL.F + CONTROL.B ~= 0 or CONTROL.Q + CONTROL.E ~= 0) and SPEED ~= 0 then
+					SPEED = 0
+				end
+				if (CONTROL.L + CONTROL.R) ~= 0 or (CONTROL.F + CONTROL.B) ~= 0 or (CONTROL.Q + CONTROL.E) ~= 0 then
+					BV.velocity = ((workspace.CurrentCamera.CoordinateFrame.lookVector * (CONTROL.F + CONTROL.B)) + ((workspace.CurrentCamera.CoordinateFrame * CFrame.new(CONTROL.L + CONTROL.R, (CONTROL.F + CONTROL.B + CONTROL.Q + CONTROL.E) * 0.2, 0).p) - workspace.CurrentCamera.CoordinateFrame.p)) * SPEED
+					lCONTROL = {F = CONTROL.F, B = CONTROL.B, L = CONTROL.L, R = CONTROL.R}
+				elseif (CONTROL.L + CONTROL.R) == 0 and (CONTROL.F + CONTROL.B) == 0 and (CONTROL.Q + CONTROL.E) == 0 and SPEED ~= 0 then
+					BV.velocity = ((workspace.CurrentCamera.CoordinateFrame.lookVector * (lCONTROL.F + lCONTROL.B)) + ((workspace.CurrentCamera.CoordinateFrame * CFrame.new(lCONTROL.L + lCONTROL.R, (lCONTROL.F + lCONTROL.B + CONTROL.Q + CONTROL.E) * 0.2, 0).p) - workspace.CurrentCamera.CoordinateFrame.p)) * SPEED
+				else
+					BV.velocity = Vector3.new(0, 0, 0)
+				end
+				BG.cframe = workspace.CurrentCamera.CoordinateFrame
+			until not FLYING
+			CONTROL = {F = 0, B = 0, L = 0, R = 0, Q = 0, E = 0}
+			lCONTROL = {F = 0, B = 0, L = 0, R = 0, Q = 0, E = 0}
+			SPEED = 0
+			BG:Destroy()
+			BV:Destroy()
+			if Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid') then
+				Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').PlatformStand = false
+			end
+		end)
+	end
+	flyKeyDown = Mouse.KeyDown:Connect(function(KEY)
+		if KEY:lower() == 'w' then
+			CONTROL.F = flyspeed
+		elseif KEY:lower() == 's' then
+			CONTROL.B = - flyspeed
+		elseif KEY:lower() == 'a' then
+			CONTROL.L = - flyspeed
+		elseif KEY:lower() == 'd' then 
+			CONTROL.R = flyspeed
+		elseif QEfly and KEY:lower() == 'e' then
+			CONTROL.Q = flyspeed*2
+		elseif QEfly and KEY:lower() == 'q' then
+			CONTROL.E = -flyspeed*2
+		end
+		pcall(function() workspace.CurrentCamera.CameraType = Enum.CameraType.Track end)
+	end)
+	flyKeyUp = Mouse.KeyUp:Connect(function(KEY)
+		if KEY:lower() == 'w' then
+			CONTROL.F = 0
+		elseif KEY:lower() == 's' then
+			CONTROL.B = 0
+		elseif KEY:lower() == 'a' then
+			CONTROL.L = 0
+		elseif KEY:lower() == 'd' then
+			CONTROL.R = 0
+		elseif KEY:lower() == 'e' then
+			CONTROL.Q = 0
+		elseif KEY:lower() == 'q' then
+			CONTROL.E = 0
+		end
+	end)
+	FLY()
+end
+function NOFLY()
+	onoroff(false)
+	FLYING = false
+	if flyKeyDown or flyKeyUp then flyKeyDown:Disconnect() flyKeyUp:Disconnect() end
+	if Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid') then Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').PlatformStand = false end
+	pcall(function() workspace.CurrentCamera.CameraType = Enum.CameraType.Custom end)
+end
