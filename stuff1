@@ -1,0 +1,157 @@
+--FLOATSCRIPT
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local Destroyah = Instance.new("TextButton")
+local Frame_2 = Instance.new("Frame")
+local OnOrOff = Instance.new("TextLabel")
+local ToggleButton = Instance.new("TextButton")
+local TextLabel = Instance.new("TextLabel")
+ScreenGui.Parent = game:GetService("Players").LocalPlayer.PlayerGui
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0.72172147, 0, 0.447888285, 0)
+Frame.Size = UDim2.new(0, 248, 0, 20)
+Destroyah.Name = "Destroyah"
+Destroyah.Parent = Frame
+Destroyah.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
+Destroyah.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Destroyah.BorderSizePixel = 0
+Destroyah.Position = UDim2.new(0.919354856, 0, 0, 0)
+Destroyah.Size = UDim2.new(0, 20, 0, 20)
+Destroyah.Font = Enum.Font.SourceSansBold
+Destroyah.Text = "X"
+Destroyah.TextColor3 = Color3.fromRGB(0, 0, 0)
+Destroyah.TextScaled = true
+Destroyah.TextSize = 14.000
+Destroyah.TextWrapped = true
+Frame_2.Parent = Frame
+Frame_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Frame_2.BackgroundTransparency = 0.300
+Frame_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame_2.BorderSizePixel = 0
+Frame_2.Position = UDim2.new(0, 0, 1, 0)
+Frame_2.Size = UDim2.new(0, 248, 0, 84)
+OnOrOff.Name = "OnOrOff"
+OnOrOff.Parent = Frame_2
+OnOrOff.BackgroundColor3 = Color3.fromRGB(107, 0, 0)
+OnOrOff.BorderColor3 = Color3.fromRGB(0, 0, 0)
+OnOrOff.BorderSizePixel = 0
+OnOrOff.Position = UDim2.new(0.0967741907, 0, 0.0833333358, 0)
+OnOrOff.Size = UDim2.new(0, 200, 0, 16)
+OnOrOff.Font = Enum.Font.Unknown
+OnOrOff.Text = "Platform Disabled"
+OnOrOff.TextColor3 = Color3.fromRGB(0, 0, 0)
+OnOrOff.TextScaled = true
+OnOrOff.TextSize = 14.000
+OnOrOff.TextWrapped = true
+ToggleButton.Name = "ToggleButton"
+ToggleButton.Parent = Frame_2
+ToggleButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ToggleButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ToggleButton.BorderSizePixel = 0
+ToggleButton.Position = UDim2.new(0.0967741907, 0, 0.40476191, 0)
+ToggleButton.Size = UDim2.new(0, 198, 0, 21)
+ToggleButton.Font = Enum.Font.SourceSansBold
+ToggleButton.Text = "Toggle Platform Walk"
+ToggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ToggleButton.TextSize = 14.000
+ToggleButton.TextWrapped = true
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderSizePixel = 0
+TextLabel.Size = UDim2.new(0, 212, 0, 20)
+TextLabel.Font = Enum.Font.Unknown
+TextLabel.Text = "Platform Walk Control"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14.000
+TextLabel.TextWrapped = true
+TextLabel.TextXAlignment = Enum.TextXAlignment.Left
+Destroyah.MouseButton1Click:Connect(function()nofloat()wait(1)ScreenGui:Destroy()end)
+local Floating = false
+floatName = "FLOAT"
+local dragging
+local dragInput
+local dragStart = Vector3.new(0,0,0)
+local startPos
+local function update(input)
+	local delta = input.Position - dragStart
+	local Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	game:GetService("TweenService"):Create(Frame, TweenInfo.new(.20), {Position = Position}):Play()
+end
+Frame.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		dragging = true
+		dragStart = input.Position
+		startPos = Frame.Position
+		input.Changed:Connect(function()if input.UserInputState == Enum.UserInputState.End then dragging = false end end)
+	end
+end)
+Frame.InputChanged:Connect(function(input)if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then dragInput = input end end)
+game:GetService("UserInputService").InputChanged:Connect(function(input)if input == dragInput and dragging then update(input)end end)
+ToggleButton.MouseButton1Click:Connect(function()	if Floating == false then float()else nofloat()end end)
+function getRoot(char)local rootPart = char:FindFirstChild('HumanoidRootPart') or char:FindFirstChild('Torso') or char:FindFirstChild('UpperTorso')return rootPart end
+function float()
+	OnOrOff.Text = "Platform Enabled"
+	OnOrOff.BackgroundColor3 = Color3.fromRGB(0, 85, 0)
+	local Mouse = game.Players.LocalPlayer:GetMouse()
+	repeat wait() until Mouse
+	Floating = true
+	local pchar = game.Players.LocalPlayer.Character
+	if pchar and not pchar:FindFirstChild(floatName) then
+		task.spawn(function()
+			local Float = Instance.new('Part')
+			Float.Name = floatName
+			Float.Parent = pchar
+			Float.Transparency = 0
+			Float.Size = Vector3.new(2,0.2,1.5)
+			Float.Anchored = true
+			local FloatValue = -3.1
+			Float.CFrame = getRoot(pchar).CFrame * CFrame.new(0,FloatValue,0)
+			qUp = Mouse.KeyUp:Connect(function(KEY)if KEY == 'q' then FloatValue = FloatValue + 0.5 end end)
+			eUp = Mouse.KeyUp:Connect(function(KEY)if KEY == 'e' then FloatValue = FloatValue - 0.5 end end)
+			qDown = Mouse.KeyDown:Connect(function(KEY)if KEY == 'q' then FloatValue = FloatValue - 0.5 end end)
+			eDown = Mouse.KeyDown:Connect(function(KEY)if KEY == 'e' then FloatValue = FloatValue + 0.5 end end)
+			floatDied = game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').Died:Connect(function()
+				FloatingFunc:Disconnect()
+				Float:Destroy()
+				qUp:Disconnect()
+				eUp:Disconnect()
+				qDown:Disconnect()
+				eDown:Disconnect()
+				floatDied:Disconnect()
+			end)
+			local function FloatPadLoop()
+				if pchar:FindFirstChild(floatName) and getRoot(pchar) then Float.CFrame = getRoot(pchar).CFrame * CFrame.new(0,FloatValue,0)
+				else
+					FloatingFunc:Disconnect()
+					Float:Destroy()
+					qUp:Disconnect()
+					eUp:Disconnect()
+					qDown:Disconnect()
+					eDown:Disconnect()
+					floatDied:Disconnect()
+				end
+			end			
+			FloatingFunc = game:GetService("RunService").Heartbeat:Connect(FloatPadLoop)
+		end)
+	end
+end
+function nofloat()
+	OnOrOff.Text = "Platform Disabled"
+	OnOrOff.BackgroundColor3 = Color3.fromRGB(107, 0, 0)
+	Floating = false
+	local pchar = game.Players.LocalPlayer.Character
+	if pchar:FindFirstChild(floatName) then pchar:FindFirstChild(floatName):Destroy()end
+	if floatDied then
+		FloatingFunc:Disconnect()
+		qUp:Disconnect()
+		eUp:Disconnect()
+		qDown:Disconnect()
+		eDown:Disconnect()
+		floatDied:Disconnect()
+	end
+end
