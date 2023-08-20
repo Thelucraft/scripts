@@ -1,0 +1,134 @@
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local Destroyah = Instance.new("TextButton")
+local Sets = Instance.new("Frame")
+local ToggleButton = Instance.new("TextButton")
+local Wsf = Instance.new("TextBox")
+local TextLabel = Instance.new("TextLabel")
+local TextLabel_2 = Instance.new("TextLabel")
+local Jpf = Instance.new("TextBox")
+local TextLabel_3 = Instance.new("TextLabel")
+local Players = game.Players
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0.596996605, 0, 0.442779273, 0)
+Frame.Size = UDim2.new(0, 248, 0, 20)
+Destroyah.Name = "Destroyah"
+Destroyah.Parent = Frame
+Destroyah.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
+Destroyah.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Destroyah.BorderSizePixel = 0
+Destroyah.Position = UDim2.new(0.919354856, 0, 0, 0)
+Destroyah.Size = UDim2.new(0, 20, 0, 20)
+Destroyah.Font = Enum.Font.SourceSansBold
+Destroyah.Text = "X"
+Destroyah.TextColor3 = Color3.fromRGB(0, 0, 0)
+Destroyah.TextScaled = true
+Destroyah.TextSize = 14.000
+Destroyah.TextWrapped = true
+Sets.Name = "Sets"
+Sets.Parent = Frame
+Sets.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Sets.BackgroundTransparency = 0.300
+Sets.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Sets.BorderSizePixel = 0
+Sets.Position = UDim2.new(0, 0, 1, 0)
+Sets.Size = UDim2.new(0, 248, 0, 86)
+ToggleButton.Name = "ToggleButton"
+ToggleButton.Parent = Sets
+ToggleButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ToggleButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
+ToggleButton.BorderSizePixel = 0
+ToggleButton.Position = UDim2.new(0.0967741907, 0, 0.746677816, 0)
+ToggleButton.Size = UDim2.new(0, 200, 0, 21)
+ToggleButton.Font = Enum.Font.SourceSansBold
+ToggleButton.Text = "Reset Ws and Jp"
+ToggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ToggleButton.TextSize = 14.000
+ToggleButton.TextWrapped = true
+Wsf.Name = "Wsf"
+Wsf.Parent = Sets
+Wsf.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Wsf.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Wsf.BorderSizePixel = 0
+Wsf.Position = UDim2.new(0.435483873, 0, 0.392857045, 0)
+Wsf.Size = UDim2.new(0, 116, 0, 17)
+Wsf.Font = Enum.Font.SourceSans
+Wsf.Text = "16"
+Wsf.TextColor3 = Color3.fromRGB(0, 0, 0)
+Wsf.TextSize = 14.000
+TextLabel.Parent = Sets
+TextLabel.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(0.0967741907, 0, 0.392857045, 0)
+TextLabel.Size = UDim2.new(0, 84, 0, 17)
+TextLabel.Font = Enum.Font.Unknown
+TextLabel.Text = "Walkspeed:"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14.000
+TextLabel.TextWrapped = true
+TextLabel_2.Parent = Sets
+TextLabel_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_2.BorderSizePixel = 0
+TextLabel_2.Position = UDim2.new(0.0967741907, 0, 0.195182621, 0)
+TextLabel_2.Size = UDim2.new(0, 84, 0, 17)
+TextLabel_2.Font = Enum.Font.Unknown
+TextLabel_2.Text = "Jumppower:"
+TextLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.TextScaled = true
+TextLabel_2.TextSize = 14.000
+TextLabel_2.TextWrapped = true
+Jpf.Name = "Jpf"
+Jpf.Parent = Sets
+Jpf.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Jpf.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Jpf.BorderSizePixel = 0
+Jpf.Position = UDim2.new(0.435483873, 0, 0.195182621, 0)
+Jpf.Size = UDim2.new(0, 116, 0, 17)
+Jpf.Font = Enum.Font.SourceSans
+Jpf.Text = "100"
+Jpf.TextColor3 = Color3.fromRGB(0, 0, 0)
+Jpf.TextSize = 14.000
+TextLabel_3.Parent = Frame
+TextLabel_3.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_3.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel_3.BorderSizePixel = 0
+TextLabel_3.Size = UDim2.new(0, 212, 0, 20)
+TextLabel_3.Font = Enum.Font.Unknown
+TextLabel_3.Text = "Character Control"
+TextLabel_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_3.TextScaled = true
+TextLabel_3.TextSize = 14.000
+TextLabel_3.TextWrapped = true
+TextLabel_3.TextXAlignment = Enum.TextXAlignment.Left
+local dragging
+local dragInput
+local dragStart = Vector3.new(0,0,0)
+local startPos
+local function update(input)
+	local delta = input.Position - dragStart
+	local Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	game:GetService("TweenService"):Create(Frame, TweenInfo.new(.20), {Position = Position}):Play()
+end
+Frame.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		dragging = true
+		dragStart = input.Position
+		startPos = Frame.Position
+		input.Changed:Connect(function()if input.UserInputState == Enum.UserInputState.End then dragging = false end end)
+	end
+end)
+Frame.InputChanged:Connect(function(input)if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then dragInput = input end end)
+game:GetService("UserInputService").InputChanged:Connect(function(input)if input == dragInput and dragging then update(input)end end)
+local human = Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid")
+function reset()Jpf.Text = 50 Wsf.Text = 16 end
+Destroyah.MouseButton1Click:Connect(function()repeat wait() until reset(); ScreenGui:Destroy()end)
+ToggleButton.MouseButton1Click:Connect(function()reset()end)
+Wsf.Changed:Connect(function()human.WalkSpeed = Wsf.Text or 16 end)
+Jpf.Changed:Connect(function()human.JumpPower = Jpf.Text or 50 end)
